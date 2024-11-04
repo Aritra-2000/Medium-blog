@@ -6,7 +6,6 @@ import { useBlogs } from "@/hooks"
 export const Blogs = () =>{
 
     const {loading, blogs} = useBlogs();
-    console.log(blogs);
 
     if(loading){
 

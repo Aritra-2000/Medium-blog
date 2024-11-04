@@ -1,9 +1,12 @@
-import { BACKEND_URL } from "@/config"
+
 import axios from "axios";
 import { ChangeEvent, useState } from "react"
 import { useNavigate } from "react-router-dom";
 
+
 export const Publish = () =>{
+
+
 
     const [ title, setTitle] = useState("");
     const [content , setContent] = useState("");
@@ -20,7 +23,7 @@ export const Publish = () =>{
                 }} /> 
                 <div className="flex items-center justify-between px-1 py-2">
                     <button onClick={async() =>{
-                        const res = await axios.post(`${BACKEND_URL}/api/v1/blog`, {
+                        const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog`, {
                             title,
                             content
                         },{

@@ -1,4 +1,3 @@
-import { BACKEND_URL } from "@/config";
 import axios from "axios";
 import { useEffect, useState } from "react"
 
@@ -21,17 +20,13 @@ export const useBlog = ({id} : {id: string}) =>{
         const fetchData = async () =>{
             try{
 
-                console.log("Fetching data from:", `${BACKEND_URL}/api/v1/blog/${id}`);
-                const token = localStorage.getItem("token");
-                console.log("Authorization token:", token);
 
-                const res = await axios.get(`${BACKEND_URL}/api/v1/blog/${id}`, {
+                const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/${id}`, {
                     headers:{
                         Authorization: localStorage.getItem("token")
                     },
                 });
 
-                console.log("API response:", res.data.post);
                 setBlog(res.data.post);
             }
             catch(error){
@@ -45,9 +40,6 @@ export const useBlog = ({id} : {id: string}) =>{
         fetchData();
 
     }, [])
-
-    console.log(blog);
-    console.log(loading)
 
     return {
         loading,
@@ -65,17 +57,12 @@ export const useBlogs = () =>{
         const fetchData = async () =>{
             try{
 
-                console.log("Fetching data from:", `${BACKEND_URL}/api/v1/blog/bulk`);
-                const token = localStorage.getItem("token");
-                console.log("Authorization token:", token);
-
-                const res = await axios.get(`${BACKEND_URL}/api/v1/blog/bulk`, {
+                const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/bulk`, {
                     headers:{
                         Authorization: localStorage.getItem("token")
                     },
                 });
 
-                console.log("API response:", res.data);
                 setBlogs(res.data.posts);
             }
             catch(error){
@@ -89,10 +76,6 @@ export const useBlogs = () =>{
         fetchData();
 
     }, [])
-
-    console.log(blogs);
-    console.log(loading)
-
     return {
         loading,
         blogs

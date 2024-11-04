@@ -6,10 +6,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Link, useNavigate } from "react-router-dom"
 import {SingupInput} from "@aritra-paul/blog-common"
-import { BACKEND_URL } from "@/config"
 import axios from "axios"
 
 export const Auth = ({type} : {type: "signup" | "signin"}) =>{
+
   const [isLoading, setIsLoading] = useState(false);
 
     const [postInputs, setPostInputs] = useState<SingupInput>({
@@ -20,14 +20,13 @@ export const Auth = ({type} : {type: "signup" | "signin"}) =>{
 
     const navigate = useNavigate();
 
-    async function sendRequest(){
+    async function sendRequest(){ 
+
         try {
-            const response = await axios.post(`${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`, postInputs); 
-            console.log("API Response:", response.data);
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`, postInputs); 
             const jwt = response.data.jwt;
 
-            console.log(jwt)
-
+          
             localStorage.setItem("token", jwt);
             navigate("/blogs");
         } catch (error) {

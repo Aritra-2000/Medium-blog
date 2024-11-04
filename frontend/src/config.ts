@@ -1,1 +1,0 @@
-export const BACKEND_URL = "https://backend.aritra-paul555.workers.dev"
