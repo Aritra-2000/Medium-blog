@@ -2,57 +2,79 @@
 import axios from "axios";
 import { ChangeEvent, useState } from "react"
 import { useNavigate } from "react-router-dom";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button";
+import { Appbar } from "@/components/Appbar";
 
 
 export const Publish = () =>{
 
 
-
     const [ title, setTitle] = useState("");
     const [content , setContent] = useState("");
+    const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate();
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
     return <div>
-        <div className="flex justify-center w-full pt-8">
-            <div className="max-w-screen-lg w-full">
-                <input type="text" onChange={(e) =>{
-                    setTitle(e.target.value)
-                }} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:outline-none" placeholder="Title"/>
-                <TextEditor onChange={(e)=>{
-                    setContent(e.target.value)
-                }} /> 
-                <div className="flex items-center justify-between px-1 py-2">
-                    <button onClick={async() =>{
-                        const res = await axios.post(`${backendUrl}/api/v1/blog`, {
-                            title,
-                            content
-                        },{
-                            headers:{
-                                Authorization: localStorage.getItem("token")
-                            }
-                        });
-                        navigate(`/blog/${res.data.id}`)
-                    }} type="submit" className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-gray-800 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-gray-500 hover:bg-gray-500">
-                        Post comment
-                    </button>
-                </div>
+        <Appbar check={true}/>
+        <div className="min-h-screen bg-gray-50 p-4">
+        <Card className="max-w-2xl mx-auto">
+        <CardHeader>
+            <CardTitle>Post Blog</CardTitle>
+        </CardHeader>
+            <CardContent className="space-y-4">
+            <div className="space-y-2">
+                <label htmlFor="title" className="text-sm font-medium text-gray-700">Title</label>
+                <Input
+                id="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+                />
             </div>
-        </div>
+            <TextEditor onChange={(e) => setContent(e.target.value)}/>
+            </CardContent>
+            <CardFooter>
+            
+            <Button onClick={async() =>{
+
+                setIsLoading(true)
+                const res = await axios.post(`${backendUrl}/api/v1/blog`, {
+                    title,
+                    content
+                },{
+                    headers:{
+                        Authorization: localStorage.getItem("token")
+                    }
+                });
+
+                setIsLoading(false);
+                navigate(`/blog/${res.data.id}`)
+            }} type="submit" className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-gray-800 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-gray-500 hover:bg-gray-500">
+            {isLoading ? 'Updating...' : 'POST'}
+            </Button>
+            </CardFooter>
+        </Card>
     </div>
+  </div>
 }
 
 function TextEditor({onChange}:{onChange: (e: ChangeEvent<HTMLTextAreaElement>)=> void}){
-    return <div className="pt-2">
-        <div>
-            <div className="w-full mb-4">
-                <div className="border bg-white rounded-t-lg dark:bg-gray-800">
-                    <label htmlFor="comment" className="sr-only">Your comment</label>
-                    <textarea onChange={onChange} id="comment" rows={4} className="w-full px-0 pl-1 text-sm text-gray-900 bg-white focus:outline-none" placeholder="Write a comment..." required ></textarea>
-                </div>
-            
-            </div>
-      </div>
+    return <div className="space-y-2">
+    <label htmlFor="content" className="text-sm font-medium text-gray-700">Content</label>
+    <Textarea
+      id="content"
+      onChange={onChange}
+      required
+      rows={10}
+    />
   </div>
 }
+
+
+
+
