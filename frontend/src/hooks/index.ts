@@ -18,10 +18,12 @@ export const useBlog = ({id} : {id: string}) =>{
     useEffect(() =>{
 
         const fetchData = async () =>{
+
+            const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
             try{
 
-
-                const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/${id}`, {
+                const res = await axios.get(`${backendUrl}/api/v1/blog/${id}`, {
                     headers:{
                         Authorization: localStorage.getItem("token")
                     },

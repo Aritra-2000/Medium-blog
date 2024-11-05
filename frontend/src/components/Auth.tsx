@@ -21,9 +21,11 @@ export const Auth = ({type} : {type: "signup" | "signin"}) =>{
     const navigate = useNavigate();
 
     async function sendRequest(){ 
+        
+        const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`, postInputs); 
+            const response = await axios.post(`${backendUrl}/api/v1/user/${type === "signup" ? "signup" : "signin"}`, postInputs); 
             const jwt = response.data.jwt;
 
           
