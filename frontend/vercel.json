@@ -1,5 +1,5 @@
 {
     "rewrites": [
-      { "source": "/proxy/:match*", "destination": "https://medium-blog-buoqu2pk9-aritra2000s-projects.vercel.app/:match*" }
+      { "source": "/(.*)", "destination": "" }
     ]
   }
