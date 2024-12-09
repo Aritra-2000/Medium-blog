@@ -2,11 +2,11 @@
 import axios from "axios";
 import { ChangeEvent, useState } from "react"
 import { useNavigate } from "react-router-dom";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button";
-import { Appbar } from "@/components/Appbar";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../components/ui/card"
+import { Input } from "../components/ui/input"
+import { Textarea } from "../components/ui/textarea"
+import { Button } from "../components/ui/button";
+import { Appbar } from "../components/Appbar";
 
 
 export const Publish = () =>{

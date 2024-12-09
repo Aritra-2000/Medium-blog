@@ -1,5 +1,5 @@
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Card, CardContent, CardFooter, CardHeader } from "../components/ui/card"
+import { Avatar, AvatarFallback } from "../components/ui/avatar"
 import { CalendarIcon, Clock } from "lucide-react"
 import {useNavigate} from "react-router-dom"
 

@@ -1,9 +1,9 @@
 "use client"
 
 import { ChangeEvent, useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Button } from "../components/ui/button"
+import { Input } from "../components/ui/input"
+import { Label } from "../components/ui/label"
 import { Link, useNavigate } from "react-router-dom"
 import {SingupInput} from "@aritra-paul/blog-common"
 import axios from "axios"

@@ -1,8 +1,8 @@
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
+import { Button } from "../components/ui/button"
 import { Pen, Users, Zap, Globe } from "lucide-react"
-import { Appbar } from "@/components/Appbar"
+import { Appbar } from "../components/Appbar"
 import {Link} from "react-router-dom"
 
 export const Home = () => {
